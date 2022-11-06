@@ -1,0 +1,243 @@
+version: '3.6'
+services:
+  homer:
+    hostname: homer
+    container_name: homer
+    image: b4bz/homer:latest
+    restart: unless-stopped
+    environment:
+      - UID=1000
+      - GID=1000
+    ports:
+    - 80:8080
+    volumes:
+    - ./volumes/homer/assets:/www/assets
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '0.25'
+        memory: 8M
+       reservations:
+        cpus: '0.125'
+        memory: 6M
+    networks:
+     stack_nw:
+      aliases:
+      - homer
+      
+  mosquitto:
+    hostname: mosquitto
+    container_name: mosquitto
+    build:
+      context: ./services/mosquitto/.
+      args:
+      - MOSQUITTO_BASE=eclipse-mosquitto:2.0.14
+    restart: unless-stopped
+    env_file:
+    - ./services/mosquitto/secrets.env
+    - ./services/mosquitto/general.env
+    ports:
+    - 1883:1883
+    volumes:
+    - ./volumes/mosquitto/config:/mosquitto/config
+    - ./volumes/mosquitto/data:/mosquitto/data
+    - ./volumes/mosquitto/log:/mosquitto/log
+    - ./volumes/mosquitto/pwfile:/mosquitto/pwfile
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '0.5'
+        memory: 8M
+       reservations:
+        cpus: '0.25'
+        memory: 4M
+    networks:
+     stack_nw:
+      aliases:
+      - mosquitto
+
+  nodered:
+    hostname: nodered
+    container_name: nodered
+    build:
+     context: ./services/nodered/.
+     args:
+     - NODERED_BASE=nodered/node-red:2.2.2
+    restart: unless-stopped
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    ports:
+    - 1880:1880
+    volumes:
+    - ./volumes/nodered/data:/data
+    - ./volumes/nodered/ssh:/root/.ssh
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.5'
+       memory: 256M
+      reservations:
+       cpus: '0.25'
+       memory: 128M 
+    depends_on:
+    - mosquitto
+    - influxdb
+    networks:
+     stack_nw:
+      aliases:
+      - nodered 
+
+  influxdb:
+    hostname: influxdb
+    container_name: influxdb
+    image: influxdb:2.4.0
+    restart: unless-stopped
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    - INFLUXDB_HTTP_FLUX_ENABLED=false
+    - INFLUXDB_REPORTING_DISABLED=false
+    - INFLUXDB_HTTP_AUTH_ENABLED=false
+    - INFLUXDB_MONITOR_STORE_ENABLED=FALSE
+    ports:
+    - 8086:8086
+    volumes:
+    - ./volumes/influxdb/data:/var/lib/influxdb2
+    - ./volumes/influxdb/config:/etc/influxdb2
+    - ./volumes/influxdb/backup:/var/lib/influxdb/backup
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '0.50'
+        memory: 64M
+       reservations:
+        cpus: '0.25'
+        memory: 32M
+    networks:
+     stack_nw:
+      aliases:
+      - influxdb
+
+  grafana:
+    hostname: grafana
+    container_name: grafana
+    image: grafana/grafana:8.5.5
+    restart: unless-stopped
+    ports:
+    - 3000:3000
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    - GF_PATHS_DATA=/var/lib/grafana
+    - GF_PATHS_LOGS=/var/log/grafana
+    volumes:
+    - ./volumes/grafana/data:/var/lib/grafana
+    - ./volumes/grafana/log:/var/log/grafana
+    depends_on:
+    - influxdb
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.5'
+       memory: 128M
+      reservations:
+       cpus: '0.25'
+       memory: 64M
+    networks:
+     stack_nw:
+      aliases:
+      - grafana
+
+  duplicati:
+    hostname: duplicati
+    container_name: duplicati
+    image: linuxserver/duplicati:amd64-v2.0.6.3-2.0.6.3_beta_2021-06-17-ls140
+    restart: unless-stopped
+    environment:
+    - PUID=0
+    - PGID=0 
+    - TZ=America/Argentina/Buenos_Aires
+    ports:
+    - 8200:8200 
+    volumes:
+    - ./volumes/duplicati/config:/config
+    - ./backups:/backups
+    - ./:/source
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/docker:/usr/bin/docker
+    # deploy:
+     # replicas: 1
+     # resources:
+       # limits:
+        # cpus: '0.50'
+        # memory: 64M
+       # reservations:
+        # cpus: '0.25'
+        # memory: 32M
+    networks:
+     stack_nw:
+      aliases:
+      - duplicati
+
+  tasmoadmin:
+    hostname: tasmoadmin
+    container_name: tasmoadmin
+    image: raymondmm/tasmoadmin
+    restart: unless-stopped
+    ports:
+      - 8088:80
+    volumes:
+    - ./volumes/tasmoadmin/data:/data
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.75'
+       memory: 16M
+      reservations:
+       cpus: '0.5'
+       memory: 8M
+    networks:
+     stack_nw:
+      aliases:
+      - tasmoadmin
+      
+  portainer-ce:
+    hostname: portainer
+    container_name: portainer
+    image: portainer/portainer-ce:2.13.1
+    restart: unless-stopped
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    ports:
+    - 9000:9000
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./volumes/portainer-ce/data:/data
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.5'
+       memory: 64M
+      reservations:
+       cpus: '0.25'
+       memory: 32M
+    networks:
+     stack_nw:
+      aliases:
+      - portainer 
+      
+networks:
+  stack_nw:
+    name: stackNet
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.144.0/24
