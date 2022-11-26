@@ -19,12 +19,13 @@ RUN npm install --save node-red-contrib-ui-led
 RUN npm install --save node-red-contrib-bigtimer
 RUN npm install --save node-red-configurable-ping
 RUN npm install --save node-red-node-openweathermap
+RUN npm install --save node-red-contrib-telegrambot
 RUN npm install --save node-red-node-email
 RUN npm install --save node-red-contrib-influxdb
 RUN npm install --save paesslerag-node-red-contrib-prtg
-#RUN npm install --save node-red-contrib-reterminal
+RUN npm install --save node-red-contrib-reterminal
 RUN npm audit fix --force
-#RUN npm install --save node-red-contrib-demo
-#RUN npm install --save node-red-contrib-acdc
+RUN npm install --save /data/node_modules/node-red-contrib-demo
+RUN npm install --save /data/node_modules/node-red-contrib-acdc
 
 # https://nodered.org/docs/getting-started/docker#dockerfile-which-copies-in-local-resources

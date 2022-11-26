@@ -3,11 +3,11 @@ services:
   homer:
     hostname: homer
     container_name: homer
-    image: b4bz/homer:latest
-    restart: unless-stopped
+    image: b4bz/homer:v22.11.1
+    restart: always
     environment:
-      - UID=1000
-      - GID=1000
+    - UID=1000
+    - GID=1000
     ports:
     - 80:8080
     volumes:
@@ -33,17 +33,20 @@ services:
       context: ./services/mosquitto/.
       args:
       - MOSQUITTO_BASE=eclipse-mosquitto:2.0.14
-    restart: unless-stopped
+    restart: always
     env_file:
     - ./services/mosquitto/secrets.env
     - ./services/mosquitto/general.env
+    expose:
+    - 1883
     ports:
-    - 1883:1883
+    - 8883:8883
     volumes:
     - ./volumes/mosquitto/config:/mosquitto/config
     - ./volumes/mosquitto/data:/mosquitto/data
     - ./volumes/mosquitto/log:/mosquitto/log
     - ./volumes/mosquitto/pwfile:/mosquitto/pwfile
+    - ./volumes/mosquitto/certs:/mosquitto/certs
     deploy:
      replicas: 1
      resources:
@@ -65,7 +68,7 @@ services:
      context: ./services/nodered/.
      args:
      - NODERED_BASE=nodered/node-red:2.2.2
-    restart: unless-stopped
+    restart: always
     environment:
     - TZ=America/Argentina/Buenos_Aires
     ports:
@@ -96,7 +99,7 @@ services:
     hostname: influxdb
     container_name: influxdb
     image: influxdb:2.4.0
-    restart: unless-stopped
+    restart: always
     environment:
     - TZ=America/Argentina/Buenos_Aires
     - INFLUXDB_HTTP_FLUX_ENABLED=false
@@ -104,7 +107,7 @@ services:
     - INFLUXDB_HTTP_AUTH_ENABLED=false
     - INFLUXDB_MONITOR_STORE_ENABLED=FALSE
     ports:
-    - 8086:8086
+    - 127.0.0.1:8086:8086
     volumes:
     - ./volumes/influxdb/data:/var/lib/influxdb2
     - ./volumes/influxdb/config:/etc/influxdb2
@@ -127,7 +130,7 @@ services:
     hostname: grafana
     container_name: grafana
     image: grafana/grafana:8.5.5
-    restart: unless-stopped
+    restart: always
     ports:
     - 3000:3000
     environment:
@@ -157,7 +160,7 @@ services:
     hostname: duplicati
     container_name: duplicati
     image: linuxserver/duplicati:amd64-v2.0.6.3-2.0.6.3_beta_2021-06-17-ls140
-    restart: unless-stopped
+    restart: always
     environment:
     - PUID=0
     - PGID=0 
@@ -188,7 +191,7 @@ services:
     hostname: tasmoadmin
     container_name: tasmoadmin
     image: raymondmm/tasmoadmin
-    restart: unless-stopped
+    restart: always
     ports:
       - 8088:80
     volumes:
@@ -207,18 +210,18 @@ services:
       aliases:
       - tasmoadmin
       
-  portainer-ce:
+  portainer:
     hostname: portainer
     container_name: portainer
     image: portainer/portainer-ce:2.13.1
-    restart: unless-stopped
+    restart: always
     environment:
     - TZ=America/Argentina/Buenos_Aires
     ports:
     - 9000:9000
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - ./volumes/portainer-ce/data:/data
+    - ./volumes/portainer/data:/data
     deploy:
      replicas: 1
      resources:

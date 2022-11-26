@@ -1,3 +1,4 @@
+#-----------------------------------------
 #     Files with passwords
 #-----------------------------------------
 # Mosquitto
@@ -13,8 +14,10 @@
 
 # Duplicatti
 /backups
+
 # Portainer
 
+#-----------------------------------------
 #     Container Volumes 
 #-----------------------------------------
 # Mosquitto
@@ -34,7 +37,7 @@
 /volumes/duplicati
 
 # Portainer
-/volumes/portainer-ce
+/volumes/portainer
 
 # Homer
 /volumes/homer

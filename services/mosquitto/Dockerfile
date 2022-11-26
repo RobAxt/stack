@@ -25,12 +25,12 @@ ENV HEALTHCHECK_SCRIPT "healthcheck.sh"
 COPY ${HEALTHCHECK_SCRIPT} /usr/local/bin/${HEALTHCHECK_SCRIPT}
 
 # define the health check
-HEALTHCHECK \
-   --start-period=30s \
-   --interval=30s \
-   --timeout=10s \
-   --retries=3 \
-   CMD ${HEALTHCHECK_SCRIPT} || exit 1
+#HEALTHCHECK \
+#   --start-period=30s \
+#   --interval=30s \
+#   --timeout=10s \
+#   --retries=3 \
+#   CMD ${HEALTHCHECK_SCRIPT} || exit 1
 
 # replace the docker entry-point script
 ENV ENTRY_POINT="docker-entrypoint.sh"
