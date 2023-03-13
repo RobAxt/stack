@@ -34,14 +34,20 @@
 /volumes/nodered/data/settings.js
 
 # Grafana
-/volumes/grafana
+/volumes/grafana/data/alerting
+/volumes/grafana/data/csv
+/volumes/grafana/data/png
+/volumes/grafana/data/storage
 
 # InfluxDB
 /volumes/influxdb
 /backups/influxdb
 
 # Duplicati
-/volumes/duplicati
+/volumes/duplicati/config/control_dir_v2
+/volumes/duplicati/config/.config
+/volumes/duplicati/config/.bash_history
+/volumes/duplicati/config/*.sqlite
 
 # Portainer
 /volumes/portainer
