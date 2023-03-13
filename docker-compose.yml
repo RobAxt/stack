@@ -1,0 +1,292 @@
+version: '3.6'
+services:
+  homer:
+    hostname: homer
+    container_name: homer
+    image: b4bz/homer:v22.11.1
+    restart: always
+    environment:
+    - UID=1000
+    - GID=1000
+    ports:
+    - 80:8080
+    volumes:
+    - ./volumes/homer/assets:/www/assets
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '0.25'
+        memory: 8M
+       reservations:
+        cpus: '0.125'
+        memory: 6M
+    networks:
+     stack_nw:
+      aliases:
+      - homer
+      
+  mosquitto:
+    hostname: mosquitto
+    container_name: mosquitto
+    build:
+      context: ./services/mosquitto/.
+      args:
+      - MOSQUITTO_BASE=eclipse-mosquitto:2.0.14
+    restart: always
+    env_file:
+    - ./services/mosquitto/secrets.env
+    - ./services/mosquitto/general.env
+    ports:
+    - 1883:1883
+    volumes:
+    - ./volumes/mosquitto/config:/mosquitto/config
+    - ./volumes/mosquitto/data:/mosquitto/data
+    - ./volumes/mosquitto/log:/mosquitto/log
+    - ./volumes/mosquitto/pwfile:/mosquitto/pwfile
+    - ./volumes/mosquitto/certs:/mosquitto/certs
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '0.5'
+        memory: 8M
+       reservations:
+        cpus: '0.25'
+        memory: 6M
+    networks:
+     stack_nw:
+      aliases:
+      - mosquitto
+
+  nodered:
+    hostname: nodered
+    container_name: nodered
+    build:
+     context: ./services/nodered/.
+     args:
+     - NODERED_BASE=nodered/node-red:2.2.2
+    restart: always
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    ports:
+    - 1880:1880
+    volumes:
+    - ./volumes/nodered/data:/data
+    - ./volumes/nodered/ssh:/root/.ssh
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.5'
+       memory: 256M
+      reservations:
+       cpus: '0.25'
+       memory: 128M 
+    depends_on:
+    - mosquitto
+    - influxdb
+    - elasticsearch
+    networks:
+     stack_nw:
+      aliases:
+      - nodered 
+
+  influxdb:
+    hostname: influxdb
+    container_name: influxdb
+    image: influxdb:2.4.0
+    restart: always
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    - INFLUXDB_HTTP_FLUX_ENABLED=false
+    - INFLUXDB_REPORTING_DISABLED=false
+    - INFLUXDB_HTTP_AUTH_ENABLED=false
+    - INFLUXDB_MONITOR_STORE_ENABLED=FALSE
+    ports:
+    - 8086:8086
+    volumes:
+    - ./volumes/influxdb/data:/var/lib/influxdb2
+    - ./volumes/influxdb/config:/etc/influxdb2
+    - ./volumes/influxdb/backup:/var/lib/influxdb/backup
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '0.50'
+        memory: 64M
+       reservations:
+        cpus: '0.25'
+        memory: 32M
+    networks:
+     stack_nw:
+      aliases:
+      - influxdb
+
+  elasticsearch:
+    hostname: elasticsearch
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    restart: always
+    environment:
+    - UID=1000
+    - GID=1000
+    - node.name=elastic-node
+    - cluster.name=es-single
+    - discovery.type=single-node
+    - bootstrap.memory_lock=true
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    - xpack.security.enabled=false
+    ports:
+    - 9200:9200
+    volumes:
+    - ./volumes/elasticsearch/data:/usr/share/elasticsearch/data
+    deploy:
+     replicas: 1
+     resources:
+       limits:
+        cpus: '3'
+        memory: 2G
+       reservations:
+        cpus: '2'
+        memory: 1G
+    ulimits:
+     memlock:
+      soft: -1
+      hard: -1
+     nofile:
+      soft: 65536
+      hard: 65536
+    networks:
+     stack_nw:
+      aliases:
+      - elasticsearch
+
+  grafana:
+    hostname: grafana
+    container_name: grafana
+    image: grafana/grafana:8.5.5
+    restart: always
+    user: "0:0"
+    ports:
+    - 3000:3000
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    - GF_PATHS_DATA=/var/lib/grafana
+    - GF_PATHS_LOGS=/var/log/grafana
+    volumes:
+    - ./volumes/grafana/data:/var/lib/grafana
+    - ./volumes/grafana/log:/var/log/grafana
+    healthcheck:
+      test: ["CMD", "wget", "-O", "/dev/null", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+    - influxdb
+    - elasticsearch
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.5'
+       memory: 128M
+      reservations:
+       cpus: '0.25'
+       memory: 64M
+    networks:
+     stack_nw:
+      aliases:
+      - grafana
+
+  duplicati:
+    hostname: duplicati
+    container_name: duplicati
+    image: linuxserver/duplicati:arm64v8-v2.0.6.3-2.0.6.3_beta_2021-06-17-ls140
+    restart: always
+    environment:
+    - PUID=0
+    - PGID=0 
+    - TZ=America/Argentina/Buenos_Aires
+    ports:
+    - 8200:8200 
+    volumes:
+    - ./volumes/duplicati/config:/config
+    - ./backups:/backups
+    - ./:/source
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/docker:/usr/bin/docker
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+         cpus: '1'
+         memory: 256M
+        reservations:
+         cpus: '0.5'
+         memory: 128M
+    networks:
+     stack_nw:
+      aliases:
+      - duplicati
+
+  tasmoadmin:
+    hostname: tasmoadmin
+    container_name: tasmoadmin
+    image: raymondmm/tasmoadmin
+    restart: always
+    ports:
+      - 8088:80
+    volumes:
+    - ./volumes/tasmoadmin/data:/data
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '1'
+       memory: 16M
+      reservations:
+       cpus: '0.75'
+       memory: 8M
+    networks:
+     stack_nw:
+      aliases:
+      - tasmoadmin
+      
+  portainer:
+    hostname: portainer
+    container_name: portainer
+    image: portainer/portainer-ce:2.13.1
+    restart: always
+    environment:
+    - TZ=America/Argentina/Buenos_Aires
+    ports:
+    - 9000:9000
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./volumes/portainer/data:/data
+    deploy:
+     replicas: 1
+     resources:
+      limits:
+       cpus: '0.5'
+       memory: 64M
+      reservations:
+       cpus: '0.25'
+       memory: 32M
+    networks:
+     stack_nw:
+      aliases:
+      - portainer 
+      
+networks:
+  stack_nw:
+    name: stackNet
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.144.0/24

@@ -1,0 +1,49 @@
+#-----------------------------------------
+#     Files with passwords
+#-----------------------------------------
+# Mosquitto
+/services/mosquitto/defaults/pwfile/pwfile
+/services/mosquitto/secrets.env
+
+# Node-Red
+/services/nodered/defaults/data/custom-settings.js
+
+# Grafana
+
+# InfluxDB
+
+# Duplicatti
+/backups
+
+# Portainer
+
+#-----------------------------------------
+#     Container Volumes 
+#-----------------------------------------
+# Mosquitto
+/volumes/mosquitto
+
+# Node-Red
+/volumes/nodered
+
+# Grafana
+/volumes/grafana
+
+# InfluxDB
+/volumes/influxdb
+/backups/influxdb
+
+# Duplicati
+/volumes/duplicati
+
+# Portainer
+/volumes/portainer
+
+# Homer
+/volumes/homer
+
+# Tasmoadmin
+/volumes/tasmoadmin
+
+# Elasticsearch
+/volumes/elasticsearch
