@@ -1,0 +1,152 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/v5/search for icons options
+
+title: "Demo IOT Dashboard"
+subtitle: "Repetidora Demo"
+logo: "assets/tools/logo-tgn.png"
+#icon: "fa-solid fa-satellite-dish" # Optional icon
+
+header: true
+footer: false
+#footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+
+columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example).
+                        # You should set it to true when using an authentication proxy, it also reloads the page when a redirection is detected when checking connectivity.
+
+# Optional theme customization
+theme: default
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+
+defaults:
+  layout: columns
+  colorTheme: auto # One of 'auto', 'light', or 'dark'
+
+# Optional message
+#message:
+  #url: https://b4bz.io
+  #style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
+  #title: "Demo !"
+  #icon: "fa fa-grin"
+  #content: "This is a dummy homepage demo. <br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+links: 
+  - name: "TGNet"
+    icon: "fas fa-building"
+    url: "http://tgnet.tgn.com.ar/tgnet/"
+  - name: "Wiki"
+    icon: "fas fa-book"
+    url: "http://www.wiki.to.tgn.com.ar/display/main/TGN+Knowledge+Center"
+  - name: "SATO"
+    icon: "fas fa-tools"
+    url: "http://www.sato1.to.tgn.com.ar/sato-web/"
+  - name: "PRTG"
+    icon: "fas fa-bell"
+    url: "https://127.0.0.1/public/login.htm"
+  # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
+  # see url field and assets/additional-page.yml.dist used in this example:
+  #- name: "another page!"
+  #  icon: "fas fa-file-alt"
+  #  url: "#additional-page" 
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Aplicaciones"
+    icon: "fas fa-desktop"
+    items:
+      - name: "Node Red UI"
+        logo: "assets/tools/nodered.png"
+        subtitle: "Interface de Usuario"
+        tag: "app"
+        #keywords: "self hosted reddit"
+        url: "http://192.168.0.19:1880/ui"
+        target: "_top"
+      - name: "Duplicati"
+        logo: "assets/tools/duplicati.png"
+        subtitle: "Backups de Archivos"
+        tag: "app"
+        url: "http://192.168.0.19:8200"
+        target: "_top"
+      - name: "Portainer"
+        logo: "assets/tools/portainer.png"
+        subtitle: "Estado de Contenedores"
+        tag: "app"
+        url: "http://192.168.0.19:9000"
+        target: "_top"
+  - name: "Base de Datos"
+    icon: "fas fa-solid fa-database"
+    items:
+      - name: "InfluxDB"
+        logo: "assets/tools/influxdb.png"
+        subtitle: "Base de Datos de Series de Tiempo"
+        tag: "db"
+        url: "http://192.168.0.19:8086"
+        target: "_top"
+#      - name: "MongoDB"
+#        logo: "assets/tools/mongodb.png"
+#        subtitle: "Base de Datos Documental"
+#        tag: "db"
+#        url: "#"
+#        target: "_top"
+  - name: "Gráficos"
+    icon: "fas fa-solid fa-poll"
+    items:
+      - name: "Grafana"
+        logo: "assets/tools/grafana.png"
+        subtitle: "Gráficos y Tendencias"
+        tag: "graf"
+        url: "http://192.168.0.19:3000"
+        target: "_top"
+  - name: "Programación"
+    icon: "fas fa-solid fa-toolbox"
+    items:
+      - name: "Node Red"
+        logo: "assets/tools/nodered.png"
+        subtitle: "Automatismos y Notificaciones"
+        tag: "app"
+        url: "http://192.168.0.19:1880"
+        target: "_top"
+  - name: "Nodos"
+    icon: "fas fa-tachometer-alt-fast"
+    items:
+      - name: "TasmoAdmin"
+        logo: "assets/tools/tasmota.svg"
+        subtitle: "Administracion Nodos Tasmota"
+        tag: "app"
+        url: "http://192.168.0.19:8088"
+        target: "_top"
+stylesheet:
+  - "assets/custom.css"
+
+#proxy: ~

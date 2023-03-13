@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+body #app .group-title {
+  padding-bottom: 8px;
+  border-bottom: 1px dashed;
+}

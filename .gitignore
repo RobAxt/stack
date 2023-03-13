@@ -24,7 +24,14 @@
 /volumes/mosquitto
 
 # Node-Red
-/volumes/nodered
+/volumes/nodered/ssh
+/volumes/nodered/data/context
+/volumes/nodered/data/*.backup
+/volumes/nodered/data/.*
+/volumes/nodered/data/.npm
+/volumes/nodered/data/flows_cred.json
+/volumes/nodered/data/custom-settings.js
+/volumes/nodered/data/settings.js
 
 # Grafana
 /volumes/grafana
@@ -40,7 +47,7 @@
 /volumes/portainer
 
 # Homer
-/volumes/homer
+#/volumes/homer
 
 # Tasmoadmin
 /volumes/tasmoadmin
