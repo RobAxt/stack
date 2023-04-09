@@ -116,10 +116,10 @@ services:
      resources:
        limits:
         cpus: '0.50'
-        memory: 64M
+        memory: 256M
        reservations:
         cpus: '0.25'
-        memory: 32M
+        memory: 128M
     networks:
      stack_nw:
       aliases:

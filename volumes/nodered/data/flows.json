@@ -40,6 +40,14 @@
         "env": []
     },
     {
+        "id": "1cc1f1daa62850fd",
+        "type": "tab",
+        "label": "Telegram - Cmnds",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "2ed4bce24e139aaa",
         "type": "tab",
         "label": "PRTG - Notification",
@@ -48,9 +56,9 @@
         "env": []
     },
     {
-        "id": "1cc1f1daa62850fd",
+        "id": "707f5efe3e0b8cc5",
         "type": "tab",
-        "label": "Telegram Cmnds",
+        "label": "ElasticSearch - Eventos",
         "disabled": false,
         "info": "",
         "env": []
@@ -102,8 +110,8 @@
             "1ea844f44bc1d989",
             "cf8879e89c58e456"
         ],
-        "x": 14,
-        "y": 739,
+        "x": 674,
+        "y": 79,
         "w": 712,
         "h": 182
     },
@@ -198,8 +206,7 @@
         "nodes": [
             "5e910d159d33ab9c",
             "5e3e591f44d77637",
-            "4e99ab639ebc6671",
-            "69fcc461308813dd"
+            "4e99ab639ebc6671"
         ],
         "x": 34,
         "y": 79
@@ -218,7 +225,8 @@
             "5656c80be2b1a470",
             "bbfc94b844b2da48",
             "49bcb7b0e7b56257",
-            "7f57f1138f02384e"
+            "7f57f1138f02384e",
+            "6644b6f145ebcf8e"
         ],
         "x": 14,
         "y": 199
@@ -276,14 +284,9 @@
         "id": "71a7fdb019368107",
         "type": "group",
         "z": "b5f4cd107135a11e",
+        "name": "AC Cycling Interface",
         "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
+            "label": true
         },
         "nodes": [
             "5f8db8831dd4bd49",
@@ -301,14 +304,9 @@
         "id": "ab485b9a039594cc",
         "type": "group",
         "z": "b5f4cd107135a11e",
+        "name": "Limits Setting Interface",
         "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
+            "label": true
         },
         "nodes": [
             "8cbc7a805a357755",
@@ -332,14 +330,9 @@
         "id": "6727a5c3d4ab908b",
         "type": "group",
         "z": "48f48e1a750bbe34",
+        "name": "Lógica de Alta Temperatura",
         "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
+            "label": true
         },
         "nodes": [
             "a4d130362ee89301",
@@ -403,7 +396,9 @@
             "832e1e16d88c2609",
             "135741652f9f66e1",
             "466b9202fc44260d",
-            "849378bd64c8c75d"
+            "849378bd64c8c75d",
+            "f9a5ef6fe14ce2ae",
+            "9fd07f1be7731ad5"
         ],
         "x": 414,
         "y": 459
@@ -443,7 +438,9 @@
             "05bfa87a70d53da5",
             "e8ec25ad8a53b533",
             "706cbe45f745c45b",
-            "7e56c775c78aa003"
+            "7e56c775c78aa003",
+            "40c62681cf76d064",
+            "94a8c5f48fa191d8"
         ],
         "x": 414,
         "y": 1319
@@ -629,11 +626,12 @@
     {
         "id": "de36bb726f99ec30",
         "type": "ui_tab",
+        "d": true,
         "name": "Test Tab",
         "icon": "dashboard",
         "order": 3,
-        "disabled": false,
-        "hidden": false
+        "disabled": true,
+        "hidden": true
     },
     {
         "id": "7055536a9c320af4",
@@ -767,6 +765,14 @@
         "sessionExpiry": ""
     },
     {
+        "id": "150d27d47bedee72",
+        "type": "elasticsearch-config",
+        "name": "ElasticSearch",
+        "server": "http://elasticsearch:9200",
+        "timeout": "5000",
+        "apiVersion": "_default"
+    },
+    {
         "id": "2bc35069f124e8a4",
         "type": "influxdb out",
         "z": "02257ae2646d96ef",
@@ -781,8 +787,8 @@
         "retentionPolicyV18Flux": "",
         "org": "TGN",
         "bucket": "sensors",
-        "x": 580,
-        "y": 800,
+        "x": 1240,
+        "y": 140,
         "wires": []
     },
     {
@@ -799,8 +805,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
-        "y": 780,
+        "x": 770,
+        "y": 120,
         "wires": [
             [
                 "774d31b565a73345",
@@ -815,7 +821,7 @@
         "z": "02257ae2646d96ef",
         "g": "302f3b7f749a930c",
         "name": "Influxdb Command",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -823,8 +829,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 590,
-        "y": 880,
+        "x": 1250,
+        "y": 220,
         "wires": []
     },
     {
@@ -875,8 +881,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 330,
-        "y": 820,
+        "x": 990,
+        "y": 160,
         "wires": [
             [
                 "2bc35069f124e8a4",
@@ -932,8 +938,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 780,
+        "x": 1000,
+        "y": 120,
         "wires": [
             [
                 "2bc35069f124e8a4",
@@ -955,8 +961,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 320,
-        "y": 880,
+        "x": 980,
+        "y": 220,
         "wires": []
     },
     {
@@ -2127,7 +2133,7 @@
         "z": "b5f4cd107135a11e",
         "g": "c227f8950cb88f50",
         "name": "Limits High/HighHigh",
-        "func": "let low  = global.get(\"ambientNode.parameters.limits.temperature.inside.high\") - 0.1;\nlet high = global.get(\"ambientNode.parameters.limits.temperature.inside.high-high\") -0.1;\n\nmsg = {ui_control:{seg1: low, seg2:high}};\nreturn msg",
+        "func": "let low  = global.get(\"ambientNode.parameters.limits.temperature.inside.high\") - 0.1;\nlet high = global.get(\"ambientNode.parameters.limits.temperature.inside.high-high\") - 0.1;\n\nmsg = {ui_control:{seg1: low, seg2:high}};\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2698,7 +2704,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c1101368656b666",
-        "x": 560,
+        "x": 720,
         "y": 300,
         "wires": []
     },
@@ -2721,7 +2727,7 @@
                 "ac9ea691e66b607c"
             ],
             [
-                "5656c80be2b1a470"
+                "6644b6f145ebcf8e"
             ],
             [
                 "7f57f1138f02384e"
@@ -3166,7 +3172,8 @@
         "y": 1400,
         "wires": [
             [
-                "c28e916db0d698d7"
+                "c28e916db0d698d7",
+                "40c62681cf76d064"
             ]
         ]
     },
@@ -3208,6 +3215,13 @@
                 "pt": "msg",
                 "to": "ambientNode.sensor[\"DS18B20-1\"].Temperature",
                 "tot": "global"
+            },
+            {
+                "t": "set",
+                "p": "level",
+                "pt": "msg",
+                "to": "warning",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -3292,6 +3306,13 @@
                 "pt": "msg",
                 "to": "1",
                 "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "level",
+                "pt": "msg",
+                "to": "warning",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -3304,7 +3325,8 @@
         "wires": [
             [
                 "e8ec25ad8a53b533",
-                "7e56c775c78aa003"
+                "7e56c775c78aa003",
+                "94a8c5f48fa191d8"
             ]
         ]
     },
@@ -3318,7 +3340,7 @@
         "links": [
             "ddc66448b57cf133"
         ],
-        "x": 905,
+        "x": 925,
         "y": 1440,
         "wires": []
     },
@@ -3477,14 +3499,14 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "*AC Toggle didn't Work. Outside is HOTTER than Inside. HELP ME Inside Temperature High!!*",
+                "to": "*AC Toggle didn't Work. Outside is HOTTER than Inside. HELP ME Inside Temperature High!!* Outside is",
                 "tot": "str"
             },
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "ambientNode.sensor[\"DS18B20-1\"].Temperature",
+                "to": "ambientNode.sensor[\"DS18B20-2\"].Temperature",
                 "tot": "global"
             },
             {
@@ -3500,6 +3522,13 @@
                 "pt": "msg",
                 "to": "1",
                 "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "level",
+                "pt": "msg",
+                "to": "critical",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -3512,7 +3541,8 @@
         "wires": [
             [
                 "2319483598506c9d",
-                "135741652f9f66e1"
+                "f9a5ef6fe14ce2ae",
+                "9fd07f1be7731ad5"
             ]
         ]
     },
@@ -3545,14 +3575,14 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "*AC Toggle didn't Work*. Opening Shutters, Outside is ",
+                "to": "*AC Toggle didn't Work*. Opening Shutters, Outside is",
                 "tot": "str"
             },
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "ambientNode.sensor[\"DS18B20-1\"].Temperature",
+                "to": "ambientNode.sensor[\"DS18B20-2\"].Temperature",
                 "tot": "global"
             },
             {
@@ -3568,6 +3598,13 @@
                 "pt": "msg",
                 "to": "1",
                 "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "level",
+                "pt": "msg",
+                "to": "warning",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -3580,7 +3617,8 @@
         "wires": [
             [
                 "2319483598506c9d",
-                "135741652f9f66e1"
+                "f9a5ef6fe14ce2ae",
+                "9fd07f1be7731ad5"
             ]
         ]
     },
@@ -3594,8 +3632,8 @@
         "links": [
             "ddc66448b57cf133"
         ],
-        "x": 1415,
-        "y": 820,
+        "x": 1395,
+        "y": 800,
         "wires": []
     },
     {
@@ -4237,7 +4275,7 @@
         "links": [
             "89969a6db281b15b"
         ],
-        "x": 905,
+        "x": 925,
         "y": 1480,
         "wires": []
     },
@@ -4251,8 +4289,8 @@
         "links": [
             "89969a6db281b15b"
         ],
-        "x": 1415,
-        "y": 860,
+        "x": 1575,
+        "y": 880,
         "wires": []
     },
     {
@@ -4319,6 +4357,102 @@
         ]
     },
     {
+        "id": "6644b6f145ebcf8e",
+        "type": "delay",
+        "z": "48f48e1a750bbe34",
+        "g": "e89d28e1fbb153a2",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 540,
+        "y": 300,
+        "wires": [
+            [
+                "5656c80be2b1a470"
+            ]
+        ]
+    },
+    {
+        "id": "f9a5ef6fe14ce2ae",
+        "type": "link out",
+        "z": "48f48e1a750bbe34",
+        "g": "e2dc7639cd38a964",
+        "name": "Event Log - Logic",
+        "mode": "link",
+        "links": [
+            "024b4f2011f811dc"
+        ],
+        "x": 1395,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "40c62681cf76d064",
+        "type": "link out",
+        "z": "48f48e1a750bbe34",
+        "g": "1902c6e68f4333e8",
+        "name": "Event Log - Logic",
+        "mode": "link",
+        "links": [
+            "024b4f2011f811dc"
+        ],
+        "x": 855,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "94a8c5f48fa191d8",
+        "type": "link out",
+        "z": "48f48e1a750bbe34",
+        "g": "1902c6e68f4333e8",
+        "name": "Event Log - Logic",
+        "mode": "link",
+        "links": [
+            "024b4f2011f811dc"
+        ],
+        "x": 925,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "9fd07f1be7731ad5",
+        "type": "change",
+        "z": "48f48e1a750bbe34",
+        "g": "e2dc7639cd38a964",
+        "name": "Inside Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ambientNode.sensor[\"DS18B20-1\"].Temperature",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1450,
+        "y": 880,
+        "wires": [
+            [
+                "135741652f9f66e1"
+            ]
+        ]
+    },
+    {
         "id": "5e910d159d33ab9c",
         "type": "inject",
         "z": "1e3ac824b73bfad1",
@@ -4344,7 +4478,7 @@
         "y": 120,
         "wires": [
             [
-                "69fcc461308813dd"
+                "5e3e591f44d77637"
             ]
         ]
     },
@@ -4368,7 +4502,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 600,
+        "x": 420,
         "y": 120,
         "wires": [
             [
@@ -4390,29 +4524,9 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
+        "x": 660,
         "y": 120,
         "wires": []
-    },
-    {
-        "id": "69fcc461308813dd",
-        "type": "function",
-        "z": "1e3ac824b73bfad1",
-        "g": "870d531e70ec2ea1",
-        "name": "Simulación",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 120,
-        "wires": [
-            [
-                "5e3e591f44d77637"
-            ]
-        ]
     },
     {
         "id": "d47103665d859fe9",
@@ -5084,7 +5198,7 @@
             "a856cbd6d1ba4f2c",
             "e8ec25ad8a53b533"
         ],
-        "x": 195,
+        "x": 55,
         "y": 160,
         "wires": [
             [
@@ -5105,7 +5219,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 850,
+        "x": 710,
         "y": 160,
         "wires": []
     },
@@ -5120,7 +5234,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
+        "x": 230,
         "y": 160,
         "wires": [
             [
@@ -5136,7 +5250,7 @@
         "bot": "607797ee86fa1498",
         "haserroroutput": true,
         "outputs": 2,
-        "x": 620,
+        "x": 480,
         "y": 160,
         "wires": [
             [
@@ -5202,156 +5316,12 @@
         ]
     },
     {
-        "id": "a1e97934163fc530",
-        "type": "comment",
-        "z": "2ed4bce24e139aaa",
-        "name": "PRTG Alarms Notifications.",
-        "info": "",
-        "x": 115,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "89969a6db281b15b",
-        "type": "link in",
-        "z": "2ed4bce24e139aaa",
-        "name": "Alarms Notifications - Alarms",
-        "links": [
-            "8c8e60fb28563b6a",
-            "fdd475a23bc218cb",
-            "25f01dfe312facf0",
-            "706cbe45f745c45b",
-            "7e56c775c78aa003",
-            "135741652f9f66e1",
-            "ceae2b7d68285817",
-            "20ac63c397656c87",
-            "466b9202fc44260d"
-        ],
-        "x": 205,
-        "y": 160,
-        "wires": [
-            [
-                "99ba2f2dad83f718",
-                "6ea29dc8b938cac8"
-            ]
-        ]
-    },
-    {
-        "id": "99ba2f2dad83f718",
-        "type": "debug",
-        "z": "2ed4bce24e139aaa",
-        "name": "ALARMS",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "6ea29dc8b938cac8",
-        "type": "function",
-        "z": "2ed4bce24e139aaa",
-        "name": "function 1",
-        "func": "\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nif (context.get(\"counter\") === undefined) {\n    context.set(\"counter\", 0)\n}",
-        "finalize": "",
-        "libs": [],
-        "x": 320,
-        "y": 160,
-        "wires": [
-            [
-                "8bb8bb4c1e472815"
-            ]
-        ]
-    },
-    {
-        "id": "e5e7ac692dd0cdd1",
-        "type": "inject",
-        "z": "2ed4bce24e139aaa",
-        "name": "24°C",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "Test Temperatura Interna 24C",
-        "payload": "24",
-        "payloadType": "num",
-        "x": 330,
-        "y": 220,
-        "wires": [
-            [
-                "8bb8bb4c1e472815"
-            ]
-        ]
-    },
-    {
-        "id": "8bb8bb4c1e472815",
-        "type": "prtg-connector",
-        "z": "2ed4bce24e139aaa",
-        "server": "667a3bfe6d02ada6",
-        "idtoken": "B0433D3D-7C1A-4DF7-9FC0-34489F7DCD5D",
-        "message": "topic",
-        "messageType": "msg",
-        "validation": "ok",
-        "timeout": "10000",
-        "name": "Conector PRTG - Temperatura Interna Segura",
-        "channels": {
-            "payload": {
-                "channeltype": "str",
-                "channel": "Temperatura",
-                "unit": "°C",
-                "unittype": "str"
-            }
-        },
-        "x": 600,
-        "y": 180,
-        "wires": [
-            [
-                "32c07fd483265596"
-            ]
-        ]
-    },
-    {
-        "id": "32c07fd483265596",
-        "type": "debug",
-        "z": "2ed4bce24e139aaa",
-        "name": "Ambient Node AlarmSent",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 930,
-        "y": 180,
-        "wires": []
-    },
-    {
         "id": "8b036882e8e71e7e",
         "type": "comment",
         "z": "1cc1f1daa62850fd",
-        "name": "",
+        "name": "Telegram Commands",
         "info": "",
-        "x": 80,
+        "x": 120,
         "y": 40,
         "wires": []
     },
@@ -5666,7 +5636,7 @@
         "method": "GET",
         "ret": "bin",
         "paytoqs": "ignore",
-        "url": "http://192.168.1.4:80/snapshot.jpg",
+        "url": "http://192.168.0.203:80/snapshot.jpg",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -5746,6 +5716,213 @@
                 "9eaa77450e365741"
             ]
         ]
+    },
+    {
+        "id": "a1e97934163fc530",
+        "type": "comment",
+        "z": "2ed4bce24e139aaa",
+        "name": "PRTG Alarms Notifications.",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "89969a6db281b15b",
+        "type": "link in",
+        "z": "2ed4bce24e139aaa",
+        "name": "Alarms Notifications - Alarms",
+        "links": [
+            "8c8e60fb28563b6a",
+            "fdd475a23bc218cb",
+            "25f01dfe312facf0",
+            "706cbe45f745c45b",
+            "7e56c775c78aa003",
+            "135741652f9f66e1",
+            "ceae2b7d68285817",
+            "20ac63c397656c87",
+            "466b9202fc44260d"
+        ],
+        "x": 125,
+        "y": 140,
+        "wires": [
+            [
+                "99ba2f2dad83f718",
+                "8bb8bb4c1e472815"
+            ]
+        ]
+    },
+    {
+        "id": "99ba2f2dad83f718",
+        "type": "debug",
+        "z": "2ed4bce24e139aaa",
+        "name": "ALARMS",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e5e7ac692dd0cdd1",
+        "type": "inject",
+        "z": "2ed4bce24e139aaa",
+        "name": "24°C",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Test Temperatura Interna 24C",
+        "payload": "24",
+        "payloadType": "num",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "8bb8bb4c1e472815"
+            ]
+        ]
+    },
+    {
+        "id": "8bb8bb4c1e472815",
+        "type": "prtg-connector",
+        "z": "2ed4bce24e139aaa",
+        "server": "667a3bfe6d02ada6",
+        "idtoken": "B0433D3D-7C1A-4DF7-9FC0-34489F7DCD5D",
+        "message": "topic",
+        "messageType": "msg",
+        "validation": "ok",
+        "timeout": "10000",
+        "name": "Conector PRTG - Temperatura Interna Segura",
+        "channels": {
+            "payload": {
+                "channeltype": "str",
+                "channel": "Temperatura",
+                "unit": "°C",
+                "unittype": "str"
+            }
+        },
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "32c07fd483265596"
+            ]
+        ]
+    },
+    {
+        "id": "32c07fd483265596",
+        "type": "debug",
+        "z": "2ed4bce24e139aaa",
+        "name": "Ambient Node AlarmSent",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e47d139dcb2e3233",
+        "type": "elasticsearch-index",
+        "z": "707f5efe3e0b8cc5",
+        "name": "",
+        "server": "150d27d47bedee72",
+        "index": "events",
+        "esType": "_doc",
+        "esId": "",
+        "routing": "",
+        "x": 430,
+        "y": 100,
+        "wires": [
+            [
+                "05c823912c5e058e"
+            ]
+        ]
+    },
+    {
+        "id": "05c823912c5e058e",
+        "type": "debug",
+        "z": "707f5efe3e0b8cc5",
+        "name": "Display Event",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "26734297a27848c0",
+        "type": "function",
+        "z": "707f5efe3e0b8cc5",
+        "name": "Ambient Node Event",
+        "func": "var now = new Date();\nlet eventMsg = msg.topic + \" \" + msg.payload + \" °C\";\nevent = {\n    \"time\": now,\n    \"level\": msg.level,\n    \"event\": eventMsg\n};\nmsg.payload = event;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 100,
+        "wires": [
+            [
+                "e47d139dcb2e3233"
+            ]
+        ]
+    },
+    {
+        "id": "024b4f2011f811dc",
+        "type": "link in",
+        "z": "707f5efe3e0b8cc5",
+        "name": "ElasticSearch Event Log",
+        "links": [
+            "f9a5ef6fe14ce2ae",
+            "40c62681cf76d064",
+            "94a8c5f48fa191d8"
+        ],
+        "x": 65,
+        "y": 100,
+        "wires": [
+            [
+                "26734297a27848c0"
+            ]
+        ]
+    },
+    {
+        "id": "b806de5c5d944b3c",
+        "type": "comment",
+        "z": "707f5efe3e0b8cc5",
+        "name": "Events Log Storage.",
+        "info": "",
+        "x": 110,
+        "y": 40,
+        "wires": []
     },
     {
         "id": "672fcc97c4e8b0b4",
@@ -5882,6 +6059,16 @@
                 "3198ddfedac4714f"
             ]
         ]
+    },
+    {
+        "id": "81d9fea380f5b687",
+        "type": "comment",
+        "z": "0232b745df08286e",
+        "name": "Azure IoT Hub Communication",
+        "info": "",
+        "x": 150,
+        "y": 40,
+        "wires": []
     },
     {
         "id": "b49f314d.e60eb",
@@ -6231,7 +6418,7 @@
         "type": "debug",
         "z": "f8e5092665a76333",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6296,7 +6483,7 @@
         "type": "debug",
         "z": "f8e5092665a76333",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -6309,54 +6496,327 @@
         "wires": []
     },
     {
-        "id": "5a1af384d41e9a50",
-        "type": "buttons",
+        "id": "64de063f365f1af5",
+        "type": "snmp",
         "z": "f8e5092665a76333",
+        "host": "192.168.0.200",
+        "version": "1",
+        "timeout": 5,
+        "community": "public",
+        "auth": "noAuthNoPriv",
+        "authprot": "MD5",
+        "privprot": "DES",
+        "oids": "1.3.6.1.2.1.1.1.0,\n1.3.6.1.4.1.18284.1.3.1.3.1.1.0,\n1.3.6.1.4.1.18284.1.3.1.1.1.1.2.0,\n1.3.6.1.4.1.18284.1.3.1.1.1.1.3.0",
         "name": "",
-        "x": 210,
-        "y": 460,
+        "x": 420,
+        "y": 380,
         "wires": [
             [
-                "cd74a0f6848267f2"
+                "b64583c61a79f138"
             ]
         ]
     },
     {
-        "id": "cd74a0f6848267f2",
+        "id": "71cdb5451afe5345",
+        "type": "inject",
+        "z": "f8e5092665a76333",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 380,
+        "wires": [
+            [
+                "64de063f365f1af5"
+            ]
+        ]
+    },
+    {
+        "id": "b64583c61a79f138",
         "type": "debug",
         "z": "f8e5092665a76333",
-        "name": "debug 1",
+        "name": "debug 2",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 420,
-        "y": 460,
+        "x": 620,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "6069bee1ae8d7111",
-        "type": "led_usr_green",
+        "id": "e20ed8cc6bdbedf8",
+        "type": "snmp table",
         "z": "f8e5092665a76333",
+        "host": "192.168.0.200",
+        "version": "1",
+        "timeout": 5,
+        "community": "public",
+        "auth": "noAuthNoPriv",
+        "authprot": "MD5",
+        "privprot": "DES",
+        "oids": "1.3.6.1.4.1.18284.1.3.1.1.1.1",
         "name": "",
-        "x": 720,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "3ea9aaa5cf97bf17",
-        "type": "touch_panel",
-        "z": "f8e5092665a76333",
-        "name": "",
-        "x": 200,
-        "y": 520,
+        "x": 430,
+        "y": 440,
         "wires": [
             [
-                "cd74a0f6848267f2"
+                "c2339f3ed713c9d3"
+            ]
+        ]
+    },
+    {
+        "id": "6bb0928f1579e700",
+        "type": "inject",
+        "z": "f8e5092665a76333",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "e20ed8cc6bdbedf8"
+            ]
+        ]
+    },
+    {
+        "id": "413c76638d982bbf",
+        "type": "snmp walker",
+        "z": "f8e5092665a76333",
+        "host": "192.168.0.200",
+        "version": "1",
+        "timeout": 5,
+        "community": "public",
+        "auth": "noAuthNoPriv",
+        "authprot": "MD5",
+        "privprot": "DES",
+        "oids": "1.3.6.1.2.1.1.1",
+        "name": "",
+        "x": 440,
+        "y": 500,
+        "wires": [
+            [
+                "38db41576f91b162"
+            ]
+        ]
+    },
+    {
+        "id": "b9977e62ce337964",
+        "type": "inject",
+        "z": "f8e5092665a76333",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 500,
+        "wires": [
+            [
+                "413c76638d982bbf"
+            ]
+        ]
+    },
+    {
+        "id": "c2339f3ed713c9d3",
+        "type": "debug",
+        "z": "f8e5092665a76333",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "38db41576f91b162",
+        "type": "debug",
+        "z": "f8e5092665a76333",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "80a43a24fafb1b40",
+        "type": "elasticsearch-index",
+        "z": "f8e5092665a76333",
+        "name": "",
+        "server": "150d27d47bedee72",
+        "index": "events",
+        "esType": "_doc",
+        "esId": "",
+        "routing": "",
+        "x": 550,
+        "y": 620,
+        "wires": [
+            [
+                "3102cedd03730df3"
+            ]
+        ]
+    },
+    {
+        "id": "3102cedd03730df3",
+        "type": "debug",
+        "z": "f8e5092665a76333",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "7ea1338172b51909",
+        "type": "inject",
+        "z": "f8e5092665a76333",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 620,
+        "wires": [
+            [
+                "11d0239e7a7c85e3"
+            ]
+        ]
+    },
+    {
+        "id": "11d0239e7a7c85e3",
+        "type": "function",
+        "z": "f8e5092665a76333",
+        "name": "function 2",
+        "func": "var now = new Date();\nevent = {\n    \"time\": now,\n    \"level\": \"warning\",\n    \"event\": \"Something happend now too.\"\n};\nmsg.payload = event;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 620,
+        "wires": [
+            [
+                "80a43a24fafb1b40"
+            ]
+        ]
+    },
+    {
+        "id": "a738fc7e26844720",
+        "type": "inject",
+        "z": "f8e5092665a76333",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 720,
+        "wires": [
+            [
+                "6278ec95e54420cf"
+            ]
+        ]
+    },
+    {
+        "id": "6278ec95e54420cf",
+        "type": "elasticsearch-deleteByQuery",
+        "z": "f8e5092665a76333",
+        "name": "Delete All",
+        "server": "150d27d47bedee72",
+        "index": "events",
+        "esType": "_doc",
+        "x": 560,
+        "y": 720,
+        "wires": [
+            [
+                "3102cedd03730df3"
             ]
         ]
     },

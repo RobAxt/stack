@@ -24,6 +24,8 @@ RUN npm install --save node-red-node-email
 RUN npm install --save node-red-contrib-influxdb
 #RUN npm install --save paesslerag-node-red-contrib-prtg
 RUN npm install --save node-red-contrib-reterminal
+RUN npm install --save node-red-contrib-elasticsearch-jupalcf
+RUN npm install --save node-red-node-snmp
 RUN npm audit fix --force
 RUN npm install --save /data/node_modules/node-red-contrib-demo
 RUN npm install --save /data/node_modules/node-red-contrib-acdc
